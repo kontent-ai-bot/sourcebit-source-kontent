@@ -1,32 +1,37 @@
 {
-  "name": "sourcebit-sample-plugin",
-  "version": "0.3.0",
-  "description": "A sample Sourcebit plugin",
+  "name": "sourcebit-source-kontent",
+  "version": "0.1.0",
+  "description": "Stackbit Source Kontent Plugin",
   "main": "index.js",
   "scripts": {
     "test": "npm run format",
-    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\"",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stackbithq/sourcebit-sample-plugin.git"
+    "url": "git+https://github.com/makma/sourcebit-source-kontent.git"
   },
   "keywords": [
     "headless",
     "headless-cms",
     "jamstack",
-    "ssg"
+    "ssg",
+    "kontent"
   ],
-  "author": "Stackbit",
+  "author": "Martin Makarsky",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stackbithq/sourcebit-sample-plugin/issues"
+    "url": "https://github.com/makma/sourcebit-source-kontent/issues"
   },
-  "homepage": "https://github.com/stackbithq/sourcebit-sample-plugin#readme",
+  "homepage": "https://github.com/makma/sourcebit-source-kontent#readme",
   "devDependencies": {
+    "@types/lodash": "^4.14.149",
     "husky": "^4.0.0",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5",
+    "lodash": "^4.17.15"
   },
   "husky": {
     "hooks": {

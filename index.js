@@ -1,5 +1,5 @@
-const axios = require("axios");
 const pkg = require("./package.json");
+const kontent = require("./build/sourceNodes");
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                           *
@@ -110,10 +110,11 @@ module.exports.bootstrap = async ({
   if (context && context.entries) {
     log(`Loaded ${context.entries.length} entries from cache`);
   } else {
-    const { data: entries } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-
+    const kontentConfig = {
+      projectId: "00676a8d-358c-0084-f2f2-33ed466c480a",
+      languageCodenames: ["default"]
+    };
+    const entries = await kontent.sourceNodes(kontentConfig);
     log(`Loaded ${entries.length} entries`);
     debug("Initial entries: %O", entries);
 
@@ -206,12 +207,7 @@ module.exports.transform = ({
   // entries, so that they conform to a standardized format
   // used by all source plugins.
   const normalizedEntries = entries.map(entry => {
-    const title = options.titleCase
-      ? entry.title
-          .split(" ")
-          .map(word => word[0].toUpperCase() + word.substring(1))
-          .join(" ")
-      : entry.title;
+    const title = entry.system.codename;
 
     return {
       ...entry,
