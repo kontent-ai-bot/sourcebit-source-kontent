@@ -1,9 +1,23 @@
+/**
+ * The plugin options.
+ */
 export interface CustomPluginOptions {
-    projectId: string;
-    languageCodenames: string[];
-} 
+  projectId: string;
+  languageCodenames: string[];
+  includeTypes: boolean = false;
+  includeTaxonomies: boolean = false;
+  authorizationKey: string = null;
+  usePreviewUrl: boolean = false;
+}
 
-interface PluginNamingConfiguration {
+export interface CustomCreateSchemaCustomizationArgs
+  extends CreateSchemaCustomizationArgs {
+  schema: {
+    buildObjectType: Function;
+  };
+}
+
+export interface PluginNamingConfiguration {
   prefix: string;
 }
 
@@ -31,7 +45,7 @@ export interface RichTextElementLink {
   urlSlug: string;
 }
 
-export interface KontentItem  {
+export interface KontentItem {
   system: {
     codename: string;
     id: string;
@@ -44,18 +58,35 @@ export interface KontentItem  {
   preferred_language: string;
 }
 
-export interface KontentType {
+export interface KontentTaxonomyTerm {
+  name: string;
+  codename: string;
+  terms: KontentTaxonomyTerm[];
+}
+
+export interface KontentTypeElementOption {
+  name: string;
+  codename: string;
+}
+
+export interface KontentTypeElementsObject {
+  [key: string]: KontentTypeElementArrayItem;
+}
+
+export interface KontentTypeElementArrayItem {
+  codename: string;
+  name: string;
+  type: string;
+  taxonomy_group: string;
+  options: KontentTypeElementOption[];
+}
+
+export interface KontentType extends NodeInput {
   system: {
     id: string;
     name: string;
     codename: string;
-    last_modified: Date;
+    last_modified: date;
   };
-  elements:
-  {
-    [key: string]: {
-      name: string;
-      type: string;
-    };
-  };
+  elements: KontentTypeElementsObject | KontentTypeElementArrayItem[];
 }

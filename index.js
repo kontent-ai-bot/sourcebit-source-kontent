@@ -1,5 +1,6 @@
 const pkg = require("./package.json");
-const kontent = require("./build/sourceNodes");
+const kontentItems = require("./build/sourceNodes.items");
+const kontentTypes = require("./build/sourceNodes.types");
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                           *
@@ -58,6 +59,9 @@ module.exports.options = {
   },
   titleCase: {
     default: false
+  },
+  kontentProjectId: {
+    private: false
   }
 };
 
@@ -110,18 +114,23 @@ module.exports.bootstrap = async ({
   if (context && context.entries) {
     log(`Loaded ${context.entries.length} entries from cache`);
   } else {
+    // TODO: add language codenames to wizard
     const kontentConfig = {
-      projectId: "00676a8d-358c-0084-f2f2-33ed466c480a",
+      projectId: options.kontentProjectId,
       languageCodenames: ["default"]
     };
-    const entries = await kontent.sourceNodes(kontentConfig);
+    const assets = null;
+    const entries = await kontentItems.kontentItemsSourceNodes(kontentConfig);
+    const models = await kontentTypes.kontentTypesSourceNodes(kontentConfig);
     log(`Loaded ${entries.length} entries`);
-    debug("Initial entries: %O", entries);
+    log(`Loaded ${models.length} models`);
 
     // 👉 Adding the newly-generated entries to the plugin's
     // context object.
     setPluginContext({
-      entries
+      assets,
+      entries,
+      models
     });
   }
 
@@ -278,10 +287,11 @@ module.exports.getSetup = ({
 }) => {
   const questions = [
     {
-      type: "confirm",
-      name: "titleCase",
-      message: "Do you want to convert the title field to title-case?",
-      default: currentOptions.pointsForJane || false
+      type: "input",
+      name: "kontentProjectId",
+      message: "What is the Kontent projectId?",
+      validate: value =>
+        value.length > 0 ? true : "The project Id cannot be empty."
     }
   ];
 
@@ -342,6 +352,6 @@ module.exports.getOptionsFromSetup = ({
   // values generated in the setup process before they're added
   // to the configuration file.
   return {
-    titleCase: answers.titleCase
+    kontentProjectId: answers.kontentProjectId
   };
 };
