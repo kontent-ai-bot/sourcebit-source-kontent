@@ -1,0 +1,8 @@
+[
+    {
+    "module": "../",
+    "description": "A Kontent source plugin for Sourcebit",
+    "author": "Martin Makarsky",
+    "type": "source"
+    }
+]
