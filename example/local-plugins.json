@@ -1,6 +1,6 @@
 [
     {
-    "module": "/Users/Martin/Documents/Projects/sourcebit-source-kontent",
+    "module": "/Users/martinm/Documents/git-projects/sourcebit-source-kontent",
     "description": "A Kontent source plugin for Sourcebit",
     "author": "Martin Makarsky",
     "type": "source"
