@@ -62,6 +62,9 @@ module.exports.options = {
   },
   kontentProjectId: {
     private: false
+  },
+  kontentLanguages: { 
+    private: false
   }
 };
 
@@ -117,11 +120,13 @@ module.exports.bootstrap = async ({
     // TODO: add language codenames to wizard
     const kontentConfig = {
       projectId: options.kontentProjectId,
-      languageCodenames: ["default"]
+      languageCodenames: options.kontentLanguageCodenames
     };
     const assets = null;
     const entries = await kontentItems.kontentItemsSourceNodes(kontentConfig);
     const models = await kontentTypes.kontentTypesSourceNodes(kontentConfig);
+    log(JSON.stringify(entries));
+    log(JSON.stringify(models));
     log(`Loaded ${entries.length} entries`);
     log(`Loaded ${models.length} models`);
 
@@ -292,6 +297,13 @@ module.exports.getSetup = ({
       message: "What is the Kontent projectId?",
       validate: value =>
         value.length > 0 ? true : "The project Id cannot be empty."
+    },
+    {
+      type: "input",
+      name: "kontentLanguageCodenames",
+      message: "What are the Kontent languages codenames?",
+      validate: value =>
+        value.length > 0 ? true : "The language codenames cannot be empty."
     }
   ];
 
@@ -352,6 +364,7 @@ module.exports.getOptionsFromSetup = ({
   // values generated in the setup process before they're added
   // to the configuration file.
   return {
-    kontentProjectId: answers.kontentProjectId
+    kontentProjectId: answers.kontentProjectId,
+    kontentLanguageCodenames: answers.kontentLanguageCodenames.split(" ")
   };
 };
