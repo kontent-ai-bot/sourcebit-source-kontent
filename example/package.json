@@ -6,6 +6,14 @@
     "sourcebit-node": "node index.js"
   },
   "dependencies": {
-    "sourcebit": "^0.4.0"
-  }
+    "sourcebit": "^0.4.0",
+    "sourcebit-source-kontent": "file:..",
+    "sourcebit-target-jekyll": "^0.4.2"
+  },
+  "description": "1.Run",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
