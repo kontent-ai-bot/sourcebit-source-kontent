@@ -1,6 +1,5 @@
+const axios = require("axios");
 const pkg = require("./package.json");
-const kontentItems = require("./build/sourceNodes.items");
-const kontentTypes = require("./build/sourceNodes.types");
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                           *
@@ -37,6 +36,15 @@ module.exports.name = pkg.name;
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 module.exports.options = {
+  mySecret: {
+    // 👉 The value will be read from `process.env.MY_SECRET`.
+    env: "MY_SECRET",
+
+    // 👉 When running the interactive setup process, this
+    // option will be stored in an `.env` file instead of the
+    // main configuration file.
+    private: true
+  },
   watch: {
     // 👉 By default, the value of this option will be `false`.
     default: false,
@@ -48,11 +56,8 @@ module.exports.options = {
     // other value defined in the configuration file.
     runtimeParameter: "watch"
   },
-  kontentProjectId: {
-    private: false
-  },
-  kontentLanguages: { 
-    private: false
+  titleCase: {
+    default: false
   }
 };
 
@@ -105,22 +110,17 @@ module.exports.bootstrap = async ({
   if (context && context.entries) {
     log(`Loaded ${context.entries.length} entries from cache`);
   } else {
+    const { data: entries } = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
 
-    const kontentConfig = {
-      projectId: options.kontentProjectId,
-      languageCodenames: options.kontentLanguageCodenames
-    };
-
-    const assets = null;
-    const entries = await kontentItems.kontentItemsSourceNodes(kontentConfig);
-    const models = await kontentTypes.kontentTypesSourceNodes(kontentConfig);
+    log(`Loaded ${entries.length} entries`);
+    debug("Initial entries: %O", entries);
 
     // 👉 Adding the newly-generated entries to the plugin's
     // context object.
     setPluginContext({
-      assets,
-      entries,
-      models
+      entries
     });
   }
 
@@ -129,8 +129,22 @@ module.exports.bootstrap = async ({
   // you'd be doing things like making regular calls to an API to check
   // whenever something changes.
   if (options.watch) {
-    // TODO: watch mode
-    console.error("Watch mode is not supported at  this time");
+    setInterval(() => {
+      const { entries } = getPluginContext();
+      const entryIndex = Math.floor(Math.random() * entries.length);
+
+      entries[entryIndex].body = entries[entryIndex].body + " (updated)";
+
+      log(`Updated entry #${entryIndex}`);
+      debug("Updated entries: %O", entries);
+
+      // 👉 We take the new entries array and update the plugin context.
+      setPluginContext({ entries });
+
+      // 👉 After updating the context, we must communicate the change and
+      // the need for all plugins to re-run in order to act on the new data.
+      refresh();
+    }, 3000);
   }
 };
 
@@ -175,42 +189,34 @@ module.exports.transform = ({
 }) => {
   // 👉 Let's retrieve from the plugin's context object the
   // entries that we've created in the bootstrap method.
-  const { entries, models } = getPluginContext();
-  const projectEnvironment = 'master';
+  const { entries } = getPluginContext();
 
-  const normalizedModels = models.map(type => {
-    const model = {
-      source: pkg.name,
-      modelName: type.system.codename,
-      modelLabel: type.system.name,
-      projectId: options.kontentProjectId,
-      projectEnvironment,
-      fieldNames: type.elements.map(element => element.codename)
-    };
-
-    return model;
-  })
+  // Source plugins are encouraged to add information about their
+  // models to the `models` data bucket.
+  const model = {
+    source: pkg.name,
+    modelName: "sample-data",
+    modelLabel: "Mock data",
+    projectId: "12345",
+    projectEnvironment: "master",
+    fieldNames: ["firstName", "lastName", "points"]
+  };
 
   // 👉 The main purpose of this method is to normalize the
   // entries, so that they conform to a standardized format
   // used by all source plugins.
   const normalizedEntries = entries.map(entry => {
-    const model = normalizedModels.map(m => m.modelName === entry.system.type);
-
-    const normalizedEntryMetadata = {
-      source: pkg.name,
-      id: entry.system.codename,
-      modelName: model.modelName,
-      modelLabel: model.modelLabel,
-      projectId: options.kontentProjectId,
-      projectEnvironment,
-      createdAt: entry.system.last_modified,
-      updatedAt: entry.system.last_modified
-    }
+    const title = options.titleCase
+      ? entry.title
+          .split(" ")
+          .map(word => word[0].toUpperCase() + word.substring(1))
+          .join(" ")
+      : entry.title;
 
     return {
       ...entry,
-      __metadata: normalizedEntryMetadata
+      title,
+      __metadata: model
     };
   });
 
@@ -219,7 +225,7 @@ module.exports.transform = ({
   // property.
   return {
     ...data,
-    models: data.models.concat(normalizedModels),
+    models: data.models.concat(model),
     objects: data.objects.concat(normalizedEntries)
   };
 };
@@ -276,18 +282,10 @@ module.exports.getSetup = ({
 }) => {
   const questions = [
     {
-      type: "input",
-      name: "kontentProjectId",
-      message: "What is the Kontent projectId?",
-      validate: value =>
-        value.length > 0 ? true : "The project Id cannot be empty."
-    },
-    {
-      type: "input",
-      name: "kontentLanguageCodenames",
-      message: "What are the Kontent languages codenames?",
-      validate: value =>
-        value.length > 0 ? true : "The language codenames cannot be empty."
+      type: "confirm",
+      name: "titleCase",
+      message: "Do you want to convert the title field to title-case?",
+      default: currentOptions.pointsForJane || false
     }
   ];
 
@@ -348,7 +346,6 @@ module.exports.getOptionsFromSetup = ({
   // values generated in the setup process before they're added
   // to the configuration file.
   return {
-    kontentProjectId: answers.kontentProjectId,
-    kontentLanguageCodenames: answers.kontentLanguageCodenames.split(" ")
+    titleCase: answers.titleCase
   };
 };
