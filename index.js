@@ -37,15 +37,6 @@ module.exports.name = pkg.name;
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 module.exports.options = {
-  mySecret: {
-    // 👉 The value will be read from `process.env.MY_SECRET`.
-    env: "MY_SECRET",
-
-    // 👉 When running the interactive setup process, this
-    // option will be stored in an `.env` file instead of the
-    // main configuration file.
-    private: true
-  },
   watch: {
     // 👉 By default, the value of this option will be `false`.
     default: false,
@@ -56,9 +47,6 @@ module.exports.options = {
     // of this option will be set to `true`, regardless of any
     // other value defined in the configuration file.
     runtimeParameter: "watch"
-  },
-  titleCase: {
-    default: false
   },
   kontentProjectId: {
     private: false
