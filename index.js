@@ -83,7 +83,7 @@ module.exports.transform = ({
   })
 
   const normalizedEntries = items.map(item => {
-    const model = normalizedModels.map(m => m.modelName === item.system.type);
+    const model = normalizedModels.filter(m => m.modelName === item.system.type)[0];
 
     const normalizedEntryMetadata = {
       source: pkg.name,
