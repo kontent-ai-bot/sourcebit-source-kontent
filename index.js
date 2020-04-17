@@ -83,21 +83,28 @@ module.exports.transform = ({
   })
 
   const normalizedEntries = items.map(item => {
-    const model = normalizedModels.filter(m => m.modelName === item.system.type)[0];
+    const normalizedModel = normalizedModels.filter(m => m.modelName === item.system.type)[0];
 
     const normalizedEntryMetadata = {
       source: pkg.name,
       id: item.system.codename,
-      modelName: model.modelName,
-      modelLabel: model.modelLabel,
+      modelName: normalizedModel.modelName,
+      modelLabel: normalizedModel.modelLabel,
       projectId: options.kontentProjectId,
       projectEnvironment,
       createdAt: item.system.last_modified,
       updatedAt: item.system.last_modified
     }
 
+    const elements = item.elements;
+    let normalizedEntry = {};
+    Object.keys(elements).forEach(key => {
+      normalizedEntry[key] = item.elements[key].value;
+    });
+
+
     return {
-      ...item,
+      ...normalizedEntry,
       __metadata: normalizedEntryMetadata
     };
   });
@@ -131,7 +138,7 @@ module.exports.getSetup = ({
     {
       type: "input",
       name: "kontentLanguageCodenames",
-      message: "What are the Kontent languages codenames (seperataed by space)?",
+      message: "What are the Kontent languages codenames (separated by space)?",
       validate: value =>
         value.length > 0 ? true : "The language codenames cannot be empty."
     }
