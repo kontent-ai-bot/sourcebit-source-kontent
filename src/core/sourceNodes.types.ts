@@ -4,10 +4,6 @@ import {
   KontentTypeElementArrayItem,
   KontentTypeElementsObject,
 } from './types';
-import {
-  getKontentTypeNodeStringForCodeName,
-  getKontentTypeTypeName,
-} from './naming';
 import { loadAllKontentTypes } from './client';
 
 const getKontentTypeArtifact = (

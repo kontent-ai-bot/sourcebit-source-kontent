@@ -1,6 +1,6 @@
 # sourcebit-source-kontent
-> A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
+> A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
 ## General
 
@@ -25,10 +25,10 @@ The plugin accepts the following configuration parameters. They can be supplied 
 - As part of a `.env` file, with the value of the _Env variable_ column separated by the value with an equals sign (e.g. `MY_VARIABLE=my-value`);
 - As a CLI parameter, when running the `sourcebit fetch` command, using the value of the _Parameter_ column as the name of the parameter (e.g. `sourcebit fetch --my-parameter`).
 
-| Property          | Type    | Visibility  | Default value                                   | Env variable              | Parameter | Description                                                                                                                                                                                                                                    |
-| ----------------- | ------- | ----------- | ----------------------------------------------- | ------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                   |
-| `projectId`       | String  | Public      |                                                 |                           |           | The ID of the Kontent [project](https://docs.kontent.ai/tutorials/develop-apps/get-started/hello-world#a-creating-a-kentico-kontent-project).                                                                                                                                        |                                                                                                                                                                                     |
-| `kontentLanguageCodenames`       | Array  | Public      |                                                 |                           |           | Array of language codenames                                                                                                                                        |                                                                                                                                                                                     |
+| Property                   | Type   | Visibility | Default value | Env variable | Parameter | Description                                                                                                                                   |
+| -------------------------- | ------ | ---------- | ------------- | ------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`                | String | Public     |               |              |           | The ID of the Kontent [project](https://docs.kontent.ai/tutorials/develop-apps/get-started/hello-world#a-creating-a-kentico-kontent-project). |  |
+| `kontentLanguageCodenames` | Array  | Public     |               |              |           | Array of language codenames                                                                                                                   |  |
 
 ### Example configuration
 
@@ -40,11 +40,8 @@ module.exports = {
     {
       module: require("sourcebit-source-kontent"),
       options: {
-        kontentProjectId: '00676a8d-358c-0084-f2f2-33ed466c480a',
-        kontentLanguageCodenames: [
-          'en-US',
-          'cs-CZ'
-        ]
+        kontentProjectId: "00676a8d-358c-0084-f2f2-33ed466c480a",
+        kontentLanguageCodenames: ["en-US", "cs-CZ"]
       }
     }
   ]
@@ -71,5 +68,6 @@ npm run build
 ```
 
 ## Missing features:
- - normalize assets
- - preview/watch/polling
+
+- normalize assets ?
+- preview/watch/polling ?

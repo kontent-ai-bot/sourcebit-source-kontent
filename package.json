@@ -5,26 +5,26 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run format",
     "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/makma/sourcebit-source-kontent.git"
+    "url": "git+https://github.com/kentico/sourcebit-source-kontent.git"
   },
   "keywords": [
-    "headless",
+    "sourcebit",
     "headless-cms",
     "jamstack",
     "ssg",
     "kontent"
   ],
-  "author": "Martin Makarsky",
+  "author": "Martin Makarsky <martinm@kentico.com> (https://github.com/makma)",
   "license": "MIT",
+  "private": false,
   "bugs": {
-    "url": "https://github.com/makma/sourcebit-source-kontent/issues"
+    "url": "https://github.com/kentico/sourcebit-source-kontent/issues"
   },
-  "homepage": "https://github.com/makma/sourcebit-source-kontent#readme",
+  "homepage": "https://github.com/kentico/sourcebit-source-kontent#readme",
   "devDependencies": {
     "@types/lodash": "^4.14.149",
     "husky": "^4.0.0",

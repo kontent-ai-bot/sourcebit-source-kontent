@@ -6,10 +6,6 @@ import {
   RichTextElementImage,
 } from './types';
 import { loadAllKontentItems } from './client';
-import {
-  getKontentItemNodeStringForId,
-  getKontentItemNodeTypeName,
-} from './naming';
 
 const addPreferredLanguageProperty = (
   items: Array<KontentItem>,
