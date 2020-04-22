@@ -1,27 +1,75 @@
-# Sourcebit Source Kontent plugin and an Example app (console.log for a now)
+# sourcebit-source-kontent
+> A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
-## How to run sourcebit fetch using local sourcebit-source-kontent
 
-1.Run
+## General
+
+With this plugin, you can add Kontent as a data source for Sourcebit.
+
+## Installation
+
+To install the plugin and add it to your project, run:
 
 ```
-cd example
-node index.js
+npm install sourcebit-source-kontent --save
 ```
 
-## How to create a new Sourcebit project using local sourcebit-source-kontent via npx create-sourcebit
+> You don't need to run this command if you start Sourcebit using the [interactive setup process](#%EF%B8%8F-interactive-setup-process), as the CLI will install the plugin for you and add it as a dependency to your project.
 
-1. Run:
+## ⚙️ Configuration
+
+The plugin accepts the following configuration parameters. They can be supplied in any of the following ways:
+
+- In the `options` object of the plugin configuration block inside `sourcebit.js`, with the value of the _Property_ column as a key;
+- As an environment variable named after the _Env variable_ column, when running the `sourcebit fetch` command;
+- As part of a `.env` file, with the value of the _Env variable_ column separated by the value with an equals sign (e.g. `MY_VARIABLE=my-value`);
+- As a CLI parameter, when running the `sourcebit fetch` command, using the value of the _Parameter_ column as the name of the parameter (e.g. `sourcebit fetch --my-parameter`).
+
+| Property          | Type    | Visibility  | Default value                                   | Env variable              | Parameter | Description                                                                                                                                                                                                                                    |
+| ----------------- | ------- | ----------- | ----------------------------------------------- | ------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                   |
+| `projectId`       | String  | Public      |                                                 |                           |           | The ID of the Kontent [project](https://docs.kontent.ai/tutorials/develop-apps/get-started/hello-world#a-creating-a-kentico-kontent-project).                                                                                                                                        |                                                                                                                                                                                     |
+| `kontentLanguageCodenames`       | Array  | Public      |                                                 |                           |           | Array of language codenames                                                                                                                                        |                                                                                                                                                                                     |
+
+### Example configuration
+
+_sourcebit.js_
+
+```js
+module.exports = {
+  plugins: [
+    {
+      module: require("sourcebit-source-kontent"),
+      options: {
+        kontentProjectId: '00676a8d-358c-0084-f2f2-33ed466c480a',
+        kontentLanguageCodenames: [
+          'en-US',
+          'cs-CZ'
+        ]
+      }
+    }
+  ]
+};
+```
+
+### Interactive setup process
+
+This plugin offers an interactive setup process via the `npx create-sourcebit` command. It asks users for their Kontent projectId and and language codenames.
+
+## 📥 Input
+
+_N/A_
+
+## 📤 Output
+
+This plugin adds normalized entries to the `objects` data bucket and normalized model objects to the `models` data bucket.
+
+## Local Development
 
 ```
 npm i
 npm run build
-cd example
 ```
 
-2. Edit `example/local-plugins.json` module property to fit your file system structure e.g: `/Users/Martin/Documents/Projects/sourcebit-source-kontent`
-3. Run:
-
-```
-npx create-sourcebit --plugins=local-plugins.json
-```
+## Missing features:
+ - normalize assets
+ - preview/watch/polling
