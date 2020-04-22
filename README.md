@@ -69,5 +69,6 @@ npm run build
 
 ## Missing features:
 
-- normalize assets ?
-- preview/watch/polling ?
+- normalize assets
+- preview/watch/polling
+- multilingual support
