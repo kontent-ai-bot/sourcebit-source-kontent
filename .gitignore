@@ -1,2 +1,5 @@
 node_modules
-build
+build/*
+example/_posts
+example/_articles
+example/sourcebit.js

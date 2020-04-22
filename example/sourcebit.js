@@ -5,7 +5,7 @@ module.exports = {
       options: {
         kontentProjectId: '00676a8d-358c-0084-f2f2-33ed466c480a',
         kontentLanguageCodenames: [
-          'us-US',
+          'en-US',
           'cs-CZ'
         ]
       }
@@ -26,10 +26,10 @@ module.exports = {
           return {
             content: {
               body: fields['content'],
-              frontmatter: { ...frontmatterFields, layout: 'my-layout-name' },
+              frontmatter: { ...frontmatterFields, layout: 'test-layout' },
             },
             format: 'frontmatter-md',
-            path: '_article/' + createdAt.substring(0, 10) + '-' + utils.slugify(fields['title']) + '.md'
+            path: '_posts/' + createdAt.substring(0, 10) + '-' + utils.slugify(fields['title']) + '.md'
           };
         }
         }
