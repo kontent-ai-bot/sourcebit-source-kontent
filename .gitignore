@@ -1,5 +1,5 @@
 node_modules
-build/*
-example/_posts
-example/_articles
-example/sourcebit.js
+build
+.cache
+.env
+*.log
