@@ -10,11 +10,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@master
-    - name: Set up Node.js
+    - name: Build
       uses: actions/setup-node@master
       with:
         node-version: 12.16.1
-    - name: Build
     - run: npm install
     - run: npm run build
     - name: Publish if version has been updated
