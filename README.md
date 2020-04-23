@@ -1,4 +1,4 @@
-# sourcebit-source-kontent
+# sourcebit-source-kontent [WIP]
 
 > A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
