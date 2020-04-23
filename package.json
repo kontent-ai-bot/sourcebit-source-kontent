@@ -1,5 +1,5 @@
 {
-  "name": "sourcebit-source-kontent",
+  "name": "@kentico/sourcebit-source-kontent",
   "version": "0.1.0",
   "description": "Stackbit Source Kontent Plugin",
   "main": "index.js",
