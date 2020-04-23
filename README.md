@@ -62,6 +62,8 @@ This plugin adds normalized entries to the `objects` data bucket and normalized 
 
 ## Local development
 
+For local development you can use example in the `example` branch.
+
 ```
 npm i
 npm run build
