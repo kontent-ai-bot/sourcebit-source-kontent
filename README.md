@@ -1,5 +1,9 @@
 # sourcebit-source-kontent [WIP]
 
+## ⚠ Disclaimer
+
+This project/repository in a work in progress and is not ready for production use yet. The features and APIs might be (and probably will be) changed.
+
 > A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
 ## General
