@@ -32,7 +32,7 @@ The plugin accepts the following configuration parameters. They can be supplied 
 | Property                   | Type   | Visibility | Default value | Env variable | Parameter | Description                                                                                                                                   |
 | -------------------------- | ------ | ---------- | ------------- | ------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `projectId`                | String | Public     |               |              |           | The ID of the Kontent [project](https://docs.kontent.ai/tutorials/develop-apps/get-started/hello-world#a-creating-a-kentico-kontent-project). |  |
-| `kontentLanguageCodenames` | Array  | Public     |               |              |           | Array of language codenames                                                                                                                   |  |
+| `languageCodenames` | Array  | Public     |               |              |           | Array of language codenames                                                                                                                   |  |
 
 ### Example configuration
 
@@ -44,8 +44,8 @@ module.exports = {
     {
       module: require("sourcebit-source-kontent"),
       options: {
-        kontentProjectId: "00676a8d-358c-0084-f2f2-33ed466c480a",
-        kontentLanguageCodenames: ["en-US", "cs-CZ"]
+        projectId: "00676a8d-358c-0084-f2f2-33ed466c480a",
+        languageCodenames: ["en-US", "cs-CZ"]
       }
     }
   ]
