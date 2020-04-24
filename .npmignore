@@ -1,7 +1,6 @@
 # Ignore everything
 *
 
-
 # Recursively allow files under subtree
 !build/**
 
