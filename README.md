@@ -1,5 +1,7 @@
 # sourcebit-source-kontent [WIP]
 
+![npm-publish](https://github.com/Kentico/sourcebit-source-kontent/workflows/npm-publish/badge.svg?branch=master)
+
 > A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
 ## General
