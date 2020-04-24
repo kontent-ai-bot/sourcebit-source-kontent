@@ -4,7 +4,6 @@
 
 # Recursively allow files under subtree
 !build/**
-!node_modules/**
 
 !index.js
 !package.json
