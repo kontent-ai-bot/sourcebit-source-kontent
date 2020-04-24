@@ -64,15 +64,6 @@ _N/A_
 
 This plugin adds normalized entries to the `objects` data bucket and normalized model objects to the `models` data bucket.
 
-## Local development
-
-For local development you can use example in the `example` branch.
-
-```
-npm i
-npm run build
-```
-
 ## Release new version
 Change version in package.json to 1.2.3 and push a commit with the message Release 1.2.3, the npm-publish action will create a new tag v1.2.3 and publish the package to the npm registry.
 
