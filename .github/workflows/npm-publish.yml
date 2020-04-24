@@ -18,7 +18,7 @@ jobs:
     - run: npm install
     - run: npm run build
     - name: Publish if version has been updated
-      uses: makma/npm-publish-action@e58d03720c6c8d13b6decbd43bad278fd634b879
+      uses: makma/npm-publish-action@37e91a0002d461451e5f0ef401deda8c30668238
       with:
         tag_name: "v%s"
         tag_message: "v%s"
