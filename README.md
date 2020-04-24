@@ -18,7 +18,7 @@ To install the plugin and add it to your project, run:
 npm install @kentico/sourcebit-source-kontent --save
 ```
 
-> You don't need to run this command if you start Sourcebit using the [interactive setup process](#%EF%B8%8F-interactive-setup-process), as the CLI will install the plugin for you and add it as a dependency to your project.
+> You don't need to run this command if you start Sourcebit using the [interactive setup process](#interactive-setup-process), as the CLI will install the plugin for you and add it as a dependency to your project.
 
 ## ⚙️ Configuration
 
