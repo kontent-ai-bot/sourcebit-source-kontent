@@ -38,6 +38,8 @@ The plugin accepts the following configuration parameters. They can be supplied 
 
 ### Example configuration
 
+For more info see the [example](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example) folder which contains already configured `sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin.
+
 _sourcebit.js_
 
 ```js
