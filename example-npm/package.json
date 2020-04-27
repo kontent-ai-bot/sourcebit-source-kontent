@@ -1,0 +1,16 @@
+{
+  "name": "sourcebit-kontent-example-npm",
+  "version": "1.0.0",
+  "description": "test of the package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mm",
+  "license": "MIT",
+  "dependencies": {
+    "sourcebit": "^0.8.0",
+    "sourcebit-target-jekyll": "^0.4.2",
+    "@kentico/sourcebit-source-kontent": "^0.1.32"
+  }
+}
