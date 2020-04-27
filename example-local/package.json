@@ -1,16 +1,19 @@
 {
-  "name": "sourcebit-kontent-example-local",
-  "version": "1.0.0",
-  "description": "test of the package",
+  "name": "example-project-local",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sourcebit-cli": "sourcebit fetch --no-cache",
+    "sourcebit-node": "node index.js"
   },
-  "author": "mm",
-  "license": "MIT",
   "dependencies": {
     "sourcebit": "^0.8.0",
-    "sourcebit-target-jekyll": "^0.4.2",
-    "sourcebit-source-kontent": "file:.."
-  }
+    "sourcebit-source-kontent": "file:..",
+    "sourcebit-target-jekyll": "^0.4.2"
+  },
+  "description": "1.Run",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
