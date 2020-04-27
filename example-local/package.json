@@ -1,5 +1,5 @@
 {
-  "name": "sourcebit-kontent-example",
+  "name": "sourcebit-kontent-example-local",
   "version": "1.0.0",
   "description": "test of the package",
   "main": "index.js",
