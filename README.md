@@ -38,7 +38,7 @@ The plugin accepts the following configuration parameters. They can be supplied 
 
 ### Example configuration
 
-For more info see the [example](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example) folder which contains already configured `sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin.
+For more info see the [example-npm](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example-npm) folder which contains already configured `@kentico\sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin.
 
 _sourcebit.js_
 
@@ -55,6 +55,10 @@ module.exports = {
   ]
 };
 ```
+
+### Local development
+
+For more info about local development/running of the source plugin see the [example-local](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example-local) folder which contains already configured local `sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin.
 
 ### Interactive setup process
 
