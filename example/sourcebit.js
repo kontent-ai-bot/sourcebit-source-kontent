@@ -1,7 +1,7 @@
 module.exports = {	
     plugins: [	
       {	
-        module: require('@kentico/sourcebit-source-kontent'),	
+        module: require('sourcebit-source-kontent'),	
         options: {	
           projectId: '00676a8d-358c-0084-f2f2-33ed466c480a',	
           languageCodenames: [	

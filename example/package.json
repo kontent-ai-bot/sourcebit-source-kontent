@@ -9,8 +9,8 @@
   "author": "mm",
   "license": "MIT",
   "dependencies": {
-    "@kentico/sourcebit-source-kontent": "^0.1.32",
     "sourcebit": "^0.8.0",
-    "sourcebit-target-jekyll": "^0.4.2"
+    "sourcebit-target-jekyll": "^0.4.2",
+    "sourcebit-source-kontent": "file:.."
   }
 }
