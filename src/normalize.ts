@@ -1,4 +1,4 @@
-import { KontentType, KontentTypeElementArrayItem, KontentItem, RichTextElementImage, AssetElementValue } from "./core/types.d";
+import { KontentType, KontentTypeElementArrayItem, KontentItem, RichTextElementImage, AssetElementValue, KontentItemElement, MultipleChoiceOption, TaxonomyTerm } from "./core/types.d";
 import pkg from "./../package.json";
 
 const projectEnvironment = "master";
@@ -47,7 +47,7 @@ export interface NormalizedEntryMetadata {
 }
 
 export interface ElementValues {
-    [key:string]: string | number | string[]
+    [key:string]: string | number | string[] | AssetElementValue[] | MultipleChoiceOption[] | TaxonomyTerm[];
 }
 
 const getNormalizedModels = (types: KontentType[], options: KontentOptions): NormalizedModel[] => {
@@ -96,12 +96,12 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
     let elementValues: ElementValues = {};
     Object.keys(item.elements).forEach(key => {
         elementValues[key] = item.elements[key].value;
-      });
+    });
 
     return {
         ...elementValues,
         __metadata: normalizedEntryMetadata
-      };
+    };
 }
 
 const getNormalizedAssets = (items: KontentItem[], models: NormalizedModel[]): Array<NormalizedAsset> => {
@@ -120,8 +120,13 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
 
     let normalizedAssetsForItem = Array<NormalizedAsset>();
 
+    let elements = Array<KontentItemElement>();
+    Object.keys(item.elements).forEach(key => {
+        elements.push(item.elements[key]);
+    });
+
     // get assets from richtext elements
-    const richtextElements = item.elements.filter(elemenet => elemenet.type === 'rich_text');
+    const richtextElements = elements.filter(elemenet => elemenet.type === 'rich_text');
 
     richtextElements.map(element => {
         const images = element.images as Array<RichTextElementImage>;
@@ -150,7 +155,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
     });
 
     // get assets from asset elements
-    const assetElements = item.elements.filter(elemenet => elemenet.type === 'asset');
+    const assetElements = elements.filter(elemenet => elemenet.type === 'asset');
 
     assetElements.map(element => {
         const assetsElementValue = element.value as Array<AssetElementValue>;

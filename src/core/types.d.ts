@@ -74,7 +74,10 @@ export interface KontentItem {
     name: string;
     type: string;
   };
-  elements: KontentItemElement[];
+  elements: {
+    [key: string]:
+    KontentItemElement;
+  };
   preferred_language: string;
 }
 
