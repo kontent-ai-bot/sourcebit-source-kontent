@@ -76,8 +76,6 @@ This plugin adds normalized entries to the `objects` data bucket and normalized 
 Change version in package.json to 1.2.3 and push a commit with the message Release 1.2.3, the npm-publish action will create a new tag v1.2.3 and publish the package to the npm registry.
 
 ## Missing features:
-
-- normalize assets
 - preview/watch/polling
 - multilingual support
 

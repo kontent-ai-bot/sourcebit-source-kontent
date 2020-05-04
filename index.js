@@ -61,11 +61,16 @@ module.exports.transform = ({
     normalizedModels,
     options
   );
+  const normalizedAssets = normalize.getNormalizedAssets(
+    items,
+    normalizedModels
+  );
+  const normalizedAssetsAndEntries = normalizedAssets.concat(normalizedEntries);
 
   return {
     ...data,
     models: data.models.concat(normalizedModels),
-    objects: data.objects.concat(normalizedEntries)
+    objects: data.objects.concat(normalizedAssetsAndEntries)
   };
 };
 
