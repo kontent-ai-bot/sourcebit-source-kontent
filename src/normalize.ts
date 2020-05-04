@@ -1,4 +1,4 @@
-import { KontentType, KontentTypeElementArrayItem, KontentItem } from "./core/types.d";
+import { KontentType, KontentTypeElementArrayItem, KontentItem, RichTextElementImage, AssetElementValue } from "./core/types.d";
 import pkg from "./../package.json";
 
 const projectEnvironment = "master";
@@ -18,8 +18,19 @@ export interface NormalizedModel {
     fieldNames: string[];
 }
 
+// https://github.com/stackbithq/sourcebit/wiki/Data-normalization#models
+
 export interface NormalizedEntry {
     [key:string]: any,
+    __metadata: NormalizedEntryMetadata
+}
+
+// https://github.com/stackbithq/sourcebit/wiki/Data-normalization#models
+export interface NormalizedAsset {
+    title: string,
+    contentType: string,
+    fileName: string,
+    url: string,
     __metadata: NormalizedEntryMetadata
 }
 
@@ -92,5 +103,92 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
         __metadata: normalizedEntryMetadata
       };
 }
+
+const getNormalizedAssets = (items: KontentItem[], models: NormalizedModel[]): Array<NormalizedAsset> => {
+    let normalizedAssets = Array<NormalizedAsset>();
+
+    items.map(item => {
+        const model = models.filter(m => m.modelName === item.system.type)[0];
+        const normalizedAssetsForItem = getNormalizedAssetsForItem(item, model);
+        normalizedAssets = normalizedAssets.concat(normalizedAssetsForItem);
+    });
+
+    return normalizedAssets;
+}
+
+const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): Array<NormalizedAsset> => {
+
+    let normalizedAssetsForItem = Array<NormalizedAsset>();
+
+    // get assets from richtext elements
+    const richtextElements = item.elements.filter(elemenet => elemenet.type === 'rich_text');
+
+    richtextElements.map(element => {
+        const images = element.images as Array<RichTextElementImage>;
+        images.map(image => {
+            const metadata: NormalizedEntryMetadata = {
+                source: pkg.name,
+                id: image.url,
+                modelName: model.modelName,
+                modelLabel: model.modelLabel,
+                projectId: model.projectId,
+                projectEnvironment: projectEnvironment,
+                createdAt: item.system.last_modified.toString(),
+                updatedAt: item.system.last_modified.toString()
+            };
+
+            const normalizedAsset: NormalizedAsset =  {
+                title: getAssetNameFromUrl(image.url),
+                contentType: getImageMimeTypeFromUrl(image.url),
+                fileName: getAssetNameFromUrl(image.url),
+                url: image.url,
+                __metadata: metadata
+            };
+
+            normalizedAssetsForItem.push(normalizedAsset);
+        });
+    });
+
+    // get assets from asset elements
+    const assetElements = item.elements.filter(elemenet => elemenet.type === 'asset');
+
+    assetElements.map(element => {
+        const assetsElementValue = element.value as Array<AssetElementValue>;
+
+        const normalizedAssetsForElement: Array<NormalizedAsset> = assetsElementValue.map(asset => {
+            const metadata: NormalizedEntryMetadata = {
+                source: pkg.name,
+                id: asset.url,
+                modelName: model.modelName,
+                modelLabel: model.modelLabel,
+                projectId: model.projectId,
+                projectEnvironment: projectEnvironment,
+                createdAt: item.system.last_modified.toString(),
+                updatedAt: item.system.last_modified.toString()
+            };
+
+            return {
+                title: asset.name,
+                contentType: asset.type,
+                fileName: asset.name,
+                url: asset.url,
+                __metadata: metadata
+            };
+        });
+
+        normalizedAssetsForItem = normalizedAssetsForItem.concat(normalizedAssetsForElement);
+    });
+
+    return normalizedAssetsForItem;
+}
+
+const getAssetNameFromUrl = (assetUrl: string): string => {
+    return assetUrl.substring(assetUrl.lastIndexOf('/') + 1);
+}
+
+const getImageMimeTypeFromUrl = (assetUrl: string): string => {
+    const extension = assetUrl.substring(assetUrl.lastIndexOf('.') + 1)
+    return `image\\${extension}`;
+}
   
-export { getNormalizedModels, getNormalizedEntries };
+export { getNormalizedModels, getNormalizedEntries, getNormalizedAssets };
