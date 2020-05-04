@@ -58,7 +58,10 @@ module.exports = {
 
 ### Local development
 
-For more info about local development/running of the source plugin see the [example-local](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example-local) folder which contains already configured local `sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin.
+For more info about local development/running of the source plugin see the [example-local](https://github.com/Kentico/sourcebit-source-kontent/tree/master/example-local) folder which contains already configured local `sourcebit-source-plugin` and `sourcebit-target-jekyll` plugin. For using local plugin run:
+```
+npx create-sourcebit --plugins=local-plugins.json
+```
 
 ### Interactive setup process
 
