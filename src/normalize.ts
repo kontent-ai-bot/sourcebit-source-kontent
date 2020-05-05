@@ -136,7 +136,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
         images.map(image => {
             const metadata: NormalizedEntryMetadata = {
                 source: pkg.name,
-                id: image.url,
+                id: getAssetIdFromUrl(image.url),
                 modelName: assetModelName,
                 modelLabel: assetModelLabel,
                 projectId: model.projectId,
@@ -166,7 +166,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
         const normalizedAssetsForElement: Array<NormalizedAsset> = assetsElementValue.map(asset => {
             const metadata: NormalizedEntryMetadata = {
                 source: pkg.name,
-                id: asset.url,
+                id: getAssetIdFromUrl(asset.url),
                 modelName: assetModelName,
                 modelLabel: assetModelLabel,
                 projectId: model.projectId,
@@ -197,6 +197,11 @@ const getAssetNameFromUrl = (assetUrl: string): string => {
 const getImageMimeTypeFromUrl = (assetUrl: string): string => {
     const extension = assetUrl.substring(assetUrl.lastIndexOf('.') + 1)
     return `image\\${extension}`;
+}
+
+const getAssetIdFromUrl = (assetUrl: string): string => {
+    const assetId = assetUrl.split('/')[4];
+    return assetId;
 }
   
 export { getNormalizedModels, getNormalizedEntries, getNormalizedAssets };
