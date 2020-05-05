@@ -118,6 +118,7 @@ const getNormalizedAssets = (items: KontentItem[], models: NormalizedModel[]): A
 
 const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): Array<NormalizedAsset> => {
 
+    const assetModelName = '__asset';
     let normalizedAssetsForItem = Array<NormalizedAsset>();
 
     let elements = Array<KontentItemElement>();
@@ -134,7 +135,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
             const metadata: NormalizedEntryMetadata = {
                 source: pkg.name,
                 id: image.url,
-                modelName: model.modelName,
+                modelName: assetModelName,
                 modelLabel: model.modelLabel,
                 projectId: model.projectId,
                 projectEnvironment: projectEnvironment,
@@ -164,7 +165,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
             const metadata: NormalizedEntryMetadata = {
                 source: pkg.name,
                 id: asset.url,
-                modelName: model.modelName,
+                modelName: assetModelName,
                 modelLabel: model.modelLabel,
                 projectId: model.projectId,
                 projectEnvironment: projectEnvironment,
