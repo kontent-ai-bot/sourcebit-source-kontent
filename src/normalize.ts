@@ -95,7 +95,7 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
 
     let elementValues: ElementValues = {};
     Object.keys(item.elements).forEach(key => {
-        elementValues[key] = item.elements[key].value;
+        elementValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
     });
 
     return {
@@ -119,6 +119,8 @@ const getNormalizedAssets = (items: KontentItem[], models: NormalizedModel[]): A
 const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): Array<NormalizedAsset> => {
 
     const assetModelName = '__asset';
+    const assetModelLabel = 'Assets';
+
     let normalizedAssetsForItem = Array<NormalizedAsset>();
 
     let elements = Array<KontentItemElement>();
@@ -136,7 +138,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
                 source: pkg.name,
                 id: image.url,
                 modelName: assetModelName,
-                modelLabel: model.modelLabel,
+                modelLabel: assetModelLabel,
                 projectId: model.projectId,
                 projectEnvironment: projectEnvironment,
                 createdAt: item.system.last_modified.toString(),
@@ -166,7 +168,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
                 source: pkg.name,
                 id: asset.url,
                 modelName: assetModelName,
-                modelLabel: model.modelLabel,
+                modelLabel: assetModelLabel,
                 projectId: model.projectId,
                 projectEnvironment: projectEnvironment,
                 createdAt: item.system.last_modified.toString(),
