@@ -164,7 +164,7 @@ const getNormalizedAssetsForItem = (item: KontentItem, model: NormalizedModel): 
             const metadata: NormalizedEntryMetadata = {
                 source: pkg.name,
                 id: asset.url,
-                modelName: model.modelName,
+                modelName: '__asset',
                 modelLabel: model.modelLabel,
                 projectId: model.projectId,
                 projectEnvironment: projectEnvironment,
