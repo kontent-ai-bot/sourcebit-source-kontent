@@ -95,7 +95,7 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
 
     let elementValues: ElementValues = {};
     Object.keys(item.elements).forEach(key => {
-        elementValues[key] = item.elements[key].value;
+        elementValues[key] = item.elements[key].value !== null ? item.elements[key].value : ''; 
     });
 
     return {
