@@ -6,6 +6,7 @@ import {
   RichTextElementImage,
 } from './types';
 import { loadAllKontentItems } from './client';
+import _ from 'lodash';
 
 const addPreferredLanguageProperty = (
   items: Array<KontentItem>,
@@ -18,9 +19,9 @@ const addPreferredLanguageProperty = (
 };
 
 const alterRichTextElements = (items: Array<KontentItem>): void => {
-  const richTextElements = items
-    .flatMap(i => Object.values(i.elements))
-    .filter((element: KontentItemElement) => element.type === 'rich_text');
+  const richTextElements = _.flatMap(items, item =>
+    Object.values(item.elements),
+  ).filter((element: KontentItemElement) => element.type === 'rich_text');
 
   for (const element of richTextElements as KontentItemElement[]) {
     (element.links as RichTextElementLink[]) = Object.keys(element.links).map(
