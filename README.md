@@ -2,11 +2,11 @@
 
 ![npm-publish](https://github.com/Kentico/sourcebit-source-kontent/workflows/npm-publish/badge.svg?branch=master)
 
-> A [Kontent](https://kontent.ai) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
+> A [Kontent](https://bit.ly/2W9UyyN) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
 ## General
 
-With this plugin, you can add Kontent as a data source for Sourcebit.
+With this plugin, you can add [Kontent](https://bit.ly/2W9UyyN) as a data source for Sourcebit.
 
 ## ⚠ Disclaimer
 
