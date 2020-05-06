@@ -1,4 +1,4 @@
-# sourcebit-source-kontent [WIP]
+# sourcebit-source-kontent
 
 ![npm-publish](https://github.com/Kentico/sourcebit-source-kontent/workflows/npm-publish/badge.svg?branch=master)
 
