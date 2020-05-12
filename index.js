@@ -2,6 +2,9 @@ const pkg = require("./package.json");
 const kontentItems = require("./build/src/core/sourceNodes.items");
 const kontentTypes = require("./build/src/core/sourceNodes.types");
 const normalize = require("./build/src/normalize");
+const localtunnel = require('localtunnel');
+const http = require('http');
+
 
 module.exports.name = pkg.name;
 
@@ -10,6 +13,14 @@ module.exports.options = {
     private: false
   },
   languageCodenames: {
+    private: false
+  },
+  watch: {
+    default: false,
+    runtimeParameter: "watch"
+  },
+  webookTunnelPort: {
+    default: 9000,
     private: false
   }
 };
@@ -42,7 +53,36 @@ module.exports.bootstrap = async ({
   }
 
   if (options.watch) {
-    console.error("Watch mode is not supported at this time");
+    http.createServer(function (req, res) {
+      let data = []
+
+      req.on('data', chunk => {
+        data.push(chunk)
+      })
+
+      req.on('end', () => {
+        console.log(JSON.parse(data));
+      })
+
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('okay');
+    }).listen(options.webookTunnelPort);
+
+    (async () => {
+      const tunnelOptions = {
+        port: options.webookTunnelPort,
+        host: 'http://serverless.social',
+        subdomain: `kontent-webhook-${options.projectId}`
+      };
+
+      const tunnel = await localtunnel(tunnelOptions);
+
+      console.log(`Webhook tunnel URL: ${tunnel.url}`);
+    
+      tunnel.on('close', () => {
+        // tunnels are closed
+      });
+    })();
   }
 };
 
