@@ -80,6 +80,5 @@ Change version in package.json to 1.2.3 and push a commit with the message Relea
 
 ## Missing features:
 - preview/watch/polling
-- multilingual support
 
 ![Analytics](https://kentico-ga-beacon.azurewebsites.net/api/UA-69014260-4/Kentico/sourcebit-source-kontent?pixel)
