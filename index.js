@@ -2,6 +2,7 @@ const pkg = require("./package.json");
 const kontentItems = require("./build/src/core/sourceNodes.items");
 const kontentTypes = require("./build/src/core/sourceNodes.types");
 const normalize = require("./build/src/normalize");
+const webhookProcessor = require("./build/src/webhookProcessor");
 const localtunnel = require('localtunnel');
 const http = require('http');
 
@@ -61,7 +62,17 @@ module.exports.bootstrap = async ({
       })
 
       req.on('end', () => {
-        console.log(JSON.parse(data));
+        const api = {debug, log};
+        const kontentConfig = {
+          projectId: options.projectId,
+          languageCodenames: options.languageCodenames
+        };
+        (async () => {
+          const webhookBody = JSON.parse(data);
+          const { items, types } = getPluginContext();
+          await webhookProcessor.handleIncomingWebhook(api, kontentConfig, webhookBody, items);
+          setPluginContext(items, types);
+        })();
       })
 
       res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -77,11 +88,8 @@ module.exports.bootstrap = async ({
 
       const tunnel = await localtunnel(tunnelOptions);
 
-      console.log(`Webhook tunnel URL: ${tunnel.url}`);
+      console.log(`Use the following webhook tunnel URL in Kontent webhook settings: ${tunnel.url}`);
     
-      tunnel.on('close', () => {
-        // tunnels are closed
-      });
     })();
   }
 };

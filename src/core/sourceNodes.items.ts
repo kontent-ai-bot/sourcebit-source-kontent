@@ -67,4 +67,9 @@ const sourceNodes = async (
   return nodes;
 };
 
-export { sourceNodes as kontentItemsSourceNodes };
+export {
+  sourceNodes as kontentItemsSourceNodes,
+  addPreferredLanguageProperty,
+  alterRichTextElements,
+  getKontentItemLanguageVariantArtifact
+};

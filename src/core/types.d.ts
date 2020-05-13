@@ -4,10 +4,12 @@
 export interface CustomPluginOptions {
   projectId: string;
   languageCodenames: string[];
-  includeTypes: boolean = false;
-  includeTaxonomies: boolean = false;
   authorizationKey: string = null;
   usePreviewUrl: boolean = false;
+  proxy: {
+    deliveryDomain: string;
+    previewDeliveryDomain: string;
+  };
 }
 
 export interface CustomCreateSchemaCustomizationArgs
@@ -78,7 +80,7 @@ export interface KontentItem {
     [key: string]:
     KontentItemElement;
   };
-  preferred_language: string;
+  [PREFERRED_LANGUAGE_IDENTIFIER]: string;
 }
 
 export interface KontentTaxonomyTerm {

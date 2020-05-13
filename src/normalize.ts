@@ -208,4 +208,4 @@ const getAssetIdFromUrl = (assetUrl: string): string => {
     return assetId;
 }
   
-export { getNormalizedModels, getNormalizedEntries, getNormalizedAssets };
+export {getNormalizedEntry, getNormalizedModels, getNormalizedEntries, getNormalizedAssets };
