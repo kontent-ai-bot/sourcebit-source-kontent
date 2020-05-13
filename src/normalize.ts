@@ -47,7 +47,7 @@ export interface NormalizedEntryMetadata {
 }
 
 export interface ElementValues {
-    [key:string]: string | number | string[] | AssetElementValue[] | MultipleChoiceOption[] | TaxonomyTerm[];
+    [key:string]: string | number | string[] | AssetElementValue[] | MultipleChoiceOption[] | TaxonomyTerm[] | KontentItem;
 }
 
 const getNormalizedModels = (types: KontentType[], options: KontentOptions): NormalizedModel[] => {
@@ -93,13 +93,17 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
         updatedAt: item.system.last_modified.toString()
     }
 
-    let elementValues: ElementValues = {};
+    let entryValues: ElementValues = {};
+
     Object.keys(item.elements).forEach(key => {
-        elementValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
+        entryValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
     });
 
+    // add kontent item metadata to the normalized entry
+    entryValues['kontent_metadata'] = item;
+
     return {
-        ...elementValues,
+        ...entryValues,
         __metadata: normalizedEntryMetadata
     };
 }
