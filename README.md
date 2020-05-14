@@ -75,6 +75,10 @@ _N/A_
 
 This plugin adds normalized entries to the `objects` data bucket and normalized model objects to the `models` data bucket.
 
+## Limitations
+
+There's a Sourcebit's limitation that the entry field for an asset can contain just one asset, therefore, only one asset per asset element is supported right now.
+
 ## Release new version
 Change version in package.json to 1.2.3 and push a commit with the message Release 1.2.3, the npm-publish action will create a new tag v1.2.3 and publish the package to the npm registry.
 
