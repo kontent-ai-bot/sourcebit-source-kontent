@@ -97,7 +97,17 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
     let entryValues: ElementValues = {};
 
     Object.keys(item.elements).forEach(key => {
-        entryValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
+        switch (item.elements[key].type) {
+            case 'asset': {
+                // There's a Sourcebit's limitation that the entry field for an asset can contain just one asset,
+                // therefore, only one asset per asset element is supported right now.
+                entryValues[key] = item.elements[key].value[0] && item.elements[key].value[0].url ? item.elements[key].value[0].url : '';
+                break;
+            }
+            default: {
+                entryValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
+            }
+        }
     });
 
     // add kontent item metadata to the normalized entry
