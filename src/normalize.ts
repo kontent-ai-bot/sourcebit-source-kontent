@@ -104,6 +104,12 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
                 entryValues[key] = item.elements[key].value[0] && item.elements[key].value[0].url ? item.elements[key].value[0].url : '';
                 break;
             }
+            case 'multiple_choice': {
+                entryValues[key] = item.elements[key].value !== null ?
+                    (item.elements[key].value as MultipleChoiceOption[]).map(option => option.name) :
+                    [];
+                break;
+            }
             default: {
                 entryValues[key] = item.elements[key].value !== null ? item.elements[key].value : '';
             }
