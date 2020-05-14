@@ -6,6 +6,7 @@ const projectEnvironment = "master";
 export interface KontentOptions {
     projectId: string,
     languageCodenames: [string],
+    includeKontentMetadata: boolean,
 }
 
 // https://github.com/stackbithq/sourcebit/wiki/Data-normalization#models
@@ -100,7 +101,9 @@ const getNormalizedEntry = (item: KontentItem, model: NormalizedModel, options: 
     });
 
     // add kontent item metadata to the normalized entry
-    entryValues['kontent_metadata'] = item;
+    if (options.includeKontentMetadata) {
+        entryValues['kontent_metadata'] = item;
+    }
 
     return {
         ...entryValues,

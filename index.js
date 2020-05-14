@@ -11,6 +11,10 @@ module.exports.options = {
   },
   languageCodenames: {
     private: false
+  },
+  includeKontentMetadata: {
+    private : false,
+    default: false,
   }
 };
 
