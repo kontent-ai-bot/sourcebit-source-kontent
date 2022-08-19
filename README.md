@@ -1,16 +1,17 @@
 # sourcebit-source-kontent
+A [Kontent](https://bit.ly/2W9UyyN) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
+
+[![No Maintenance Intended](https://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+## :warning: Archival notice
+> This repository has been archived and is no longer maintained.
 
 ![npm-publish](https://github.com/Kentico/sourcebit-source-kontent/workflows/npm-publish/badge.svg?branch=master)
 
-> A [Kontent](https://bit.ly/2W9UyyN) source plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
 ## General
 
 With this plugin, you can add [Kontent](https://bit.ly/2W9UyyN) as a data source for Sourcebit.
-
-## ⚠ Disclaimer
-
-This project/repository in a work in progress and is not ready for production use yet. The features and APIs might be (and probably will be) changed.
 
 ## Installation
 
